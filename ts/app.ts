@@ -1,33 +1,35 @@
-import { DefaultIcon } from "$ts/images/apps";
-import { Runtime } from "./runtime";
-import AppSvelte from "../App.svelte";
+import { CalculatorIcon } from "$ts/images/apps";
 import { App } from "$types/app";
+import AppSvelte from "../App.svelte";
+import { Runtime } from "./runtime";
 
-export const app: App = {
+export const CalculatorApp: App = {
   metadata: {
-    name: "App Template",
-    description: "This is an app template",
-    author: "The ArcOS Team",
-    version: "0.0.0",
-    icon: DefaultIcon
+    name: "Calculator",
+    description: "ArcOS Calculator",
+    version: "3.0.0",
+    author: "Izaak Kuipers",
+    icon: CalculatorIcon,
+    appGroup: "utilities",
   },
   runtime: Runtime,
   content: AppSvelte,
-  id: "appTemplate",
-  size: { w: 0, h: 0 },
-  minSize: { w: 0, h: 0 },
-  maxSize: { w: 0, h: 0 },
-  pos: { x: 0, y: 0 },
+  id: "CalculatorApp",
+  size: { w: 340, h: NaN },
+  pos: { x: 60, y: 60 },
+  minSize: { w: 340, h: 412 },
+  maxSize: { w: 340, h: 422 },
   state: {
     minimized: false,
     maximized: false,
     headless: false,
     fullscreen: false,
-    resizable: false
+    resizable: false,
   },
   controls: {
-    minimize: false,
+    minimize: true,
     maximize: false,
-    close: false
-  }
-}
+    close: true,
+  },
+  glass: true,
+};
