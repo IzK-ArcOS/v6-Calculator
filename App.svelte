@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Function from "./Components/Function.svelte";
+  import Key from "./Components/Key.svelte";
   import "./css/main.css";
   import { Runtime } from "./ts/runtime";
 
@@ -11,18 +13,9 @@
 <div class="keys">
   {#each runtime.keys as key}
     {#if !key[0].startsWith("%%")}
-      <button
-        on:click={() => runtime.processKey(key[1])}
-        class:empty={!key[0]}
-        class:alt={runtime.Store.altClasses.includes(key[1])}
-        class="shell-colored"
-      >
-        {key[0]}
-      </button>
+      <Key {key} {runtime} />
     {:else}
-      <button on:click={runtime.Functions[key[0]][1]} class={runtime.Functions[key[1]][2]}>
-        {runtime.Functions[key[1]][0]}
-      </button>
+      <Function {key} {runtime} />
     {/if}
   {/each}
 </div>
