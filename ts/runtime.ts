@@ -8,13 +8,14 @@ import { CalculatorStore } from "./store";
 import { CalculatorKey, CalculatorKeys, CalculatorOverrides } from "./types";
 
 export class Runtime extends AppRuntime {
-  public Value = Store<string>();
+  public Value = Store<string>("");
   public Store = new CalculatorStore();
 
   constructor(app: App, mutator: AppMutator, process: Process) {
     super(app, mutator, process);
 
     process.accelerator.store.push(...CalculatorAccelerators(this));
+    this.keys = this.compileKeys(this.Store.AllowedKeys, this.Store.Overrides);
   }
 
   public keys: CalculatorKeys = [];

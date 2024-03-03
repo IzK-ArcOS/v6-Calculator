@@ -1,9 +1,28 @@
 <script lang="ts">
-  import { App } from "$types/app";
   import "./css/main.css";
+  import { Runtime } from "./ts/runtime";
 
-  export let app: App;
+  export let runtime: Runtime;
+
+  const { Value } = runtime;
 </script>
 
-<h1>Hello, World!</h1>
-<p>Working! App {app.metadata.name}, version {app.metadata.version}.</p>
+<input type="text" class="display" readonly value={$Value} placeholder="0" />
+<div class="keys">
+  {#each runtime.keys as key}
+    {#if !key[0].startsWith("%%")}
+      <button
+        on:click={() => runtime.processKey(key[1])}
+        class:empty={!key[0]}
+        class:alt={runtime.Store.altClasses.includes(key[1])}
+        class="shell-colored"
+      >
+        {key[0]}
+      </button>
+    {:else}
+      <button on:click={runtime.Functions[key[0]][1]} class={runtime.Functions[key[1]][2]}>
+        {runtime.Functions[key[1]][0]}
+      </button>
+    {/if}
+  {/each}
+</div>
