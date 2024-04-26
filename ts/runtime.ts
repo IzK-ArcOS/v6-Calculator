@@ -14,17 +14,19 @@ export class Runtime extends AppRuntime {
   constructor(app: App, mutator: AppMutator, process: Process) {
     super(app, mutator, process);
 
-    process.accelerator.store.push(...CalculatorAccelerators(this));
-    this.keys = this.compileKeys(this.Store.AllowedKeys, this.Store.Overrides);
+    process.accelerator.store.push(...CalculatorAccelerators(this)); // Push the keyboard shortcuts to the accelerator
+    this.keys = this.compileKeys(this.Store.AllowedKeys, this.Store.Overrides); // Compile the various UI keys
   }
 
   public keys: CalculatorKeys = [];
   public Functions: { [key: string]: [string, () => void, string] } = {
+    // Special functions used
     "%%C": ["C", () => this.Value.set(""), "clear"],
     "%%E": ["=", () => this.evaluate(), "process"],
   };
 
   private eval(expr: string) {
+    // Evaluate the user input safely
     try {
       return Function(`'use strict'; return (${expr})`)();
     } catch {
