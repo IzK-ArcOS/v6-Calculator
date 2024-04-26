@@ -4,6 +4,7 @@ import { App } from "$types/app";
 import AppSvelte from "../App.svelte";
 import { Runtime } from "./runtime";
 
+// Application metadata
 export const CalculatorApp: App = {
   metadata: {
     name: "Calculator",
